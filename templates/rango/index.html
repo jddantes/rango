@@ -23,7 +23,7 @@
 	{% if pages %}
 		<ul>
 			{% for page in pages %}
-				<li><a href="{{page.url}}">{{page.title}}</a></li>
+				<li><a href="{{page.url}}">{{page.title}}</a> - {{page.views}} views</li>
 			{% endfor %}
 		</ul>	
 	{% else %}
@@ -32,7 +32,7 @@
 
 
 	<a href="/rango/about">About</a><br/>
-	<img src="{% static "images/rango-picture.png" %}" alt="Picture of Rango" />
+	<img src="{% static "images/rango-picture.png" %}" alt="Picture of Rango" /></br>
 
 	<a href="/rango/add_category/">Add a New Category</a><br />
 </body>
