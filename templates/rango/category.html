@@ -1,9 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Rango</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% blocktitle %}{{ category_name }}{% endblock %}
+
+{% block body_block %}
 	<h1>{{ category_name }}</h1>
 	{% if category %}
 		{% if pages %}
@@ -22,8 +23,5 @@
 		The specified category {{ category_name }} does not exist!
 	{% endif %}
 
+{% endblock %}
 
-	<a href="/rango/">Home</a></br>
-
-</body>
-</html>
