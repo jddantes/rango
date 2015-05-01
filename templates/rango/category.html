@@ -1,8 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'rango/base.html' %}
 
 {% load staticfiles %}
 
-{% blocktitle %}{{ category_name }}{% endblock %}
+{% block title %}{{ category_name }}{% endblock %}
 
 {% block body_block %}
 	<h1>{{ category_name }}</h1>
