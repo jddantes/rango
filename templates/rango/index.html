@@ -3,34 +3,51 @@
 {% load staticfiles %}
 
 {% block body_block %}
-	<h1>Rango says...</h1>
-
+	<div class="page-header">
 	{% if user.is_authenticated %}
-		{{ user.username }}!
+		<h1>Rango says...{ user.username }}!</h1>
 	{% else %}
-		hello world! <strong>{{ boldmessage }}</strong><br />
+		<h1>Rango says... hello world! </h1><br />
 	{% endif %}
+	</div>
 
-	{% if categories %}
-		<ul>
-			{% for category in categories %}
-			<li><a href="{% url 'category' category.slug %}">{{ category.name }}</a></li>
-			{% endfor %}
-		</ul>	
-	{% else %}
-		<strong>There are no categories present.</strong>
-	{% endif %}
+	<div class="row placeholders">
+		<div class="col-xs-12 col-sm-6 placeholder">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">Categories</h3>
+				</div>
+			</div>
+			
 
-	{% if pages %}
-		<ul>
-			{% for page in pages %}
-				<li><a href="{{page.url}}">{{page.title}}</a> - {{page.views}} views</li>
-			{% endfor %}
-		</ul>	
-	{% else %}
-		<strong>There are no pages present.</strong>
-	{% endif %}
+			{% if categories %}
+				<ul class="list-group">
+					{% for category in categories %}
+					<li class="list-group-item"><a href="{% url 'category' category.slug %}">{{ category.name }}</a></li>
+					{% endfor %}
+				</ul>	
+			{% else %}
+				<strong>There are no categories present.</strong>
+			{% endif %}
+		</div>
+		<div class="col-xs-12 col-sm-6 placeholder">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">Pages</h3>
+				</div>
+			</div>
 
+			{% if pages %}
+				<ul class="list-group">
+					{% for page in pages %}
+						<li class="list-group-item"><a href="{{page.url}}">{{page.title}}</a> - {{page.views}} views</li>
+					{% endfor %}
+				</ul>	
+			{% else %}
+				<strong>There are no pages present.</strong>
+			{% endif %}
+		</div>
+	</div>
 
 	<a href="/rango/about">About</a><br/>
 	<img src="{% static "images/rango-picture.png" %}" alt="Picture of Rango" /></br>
