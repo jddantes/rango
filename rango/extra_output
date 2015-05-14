@@ -1,0 +1,3 @@
+eri80JPiqDgBIyLqEiWmIZvVX/sxGkuVRfWyGX03lK0
+Enter query: https://api.datamarket.azure.com/Bing/Search/Web?Query=%27google%20fibre%27
+Error when querying the Bing API:  HTTP Error 401: The authorization type you provided is not supported.  Only Basic and OAuth are supported

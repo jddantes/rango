@@ -13,19 +13,12 @@ def run_query(search_terms):
 	results_per_page = 10
 	offset = 0
 
-	query = "'{0}'".format(search_terms)
+	query = "'{0}'".format("google fibre")
+
 	query = urllib.parse.quote(query)
 
-	search_url = "{0}{1}?$format=json&$top={2}&$skip={3}&Query={4}".format(
-		root_url,
-		source,
-		results_per_page,
-		offset,
-		query)
 
-	# search_url = root_url + "Web?Query=" + query
-
-	# print(search_url)
+	search_url = root_url + "Web?$format=json&Query=" + query
 
 	username = ''
 
@@ -40,10 +33,15 @@ def run_query(search_terms):
 		urllib.request.install_opener(opener)
 
 		response = urllib.request.urlopen(search_url).read().decode('utf-8')
+		print(response)
+		# print(type(response))
 
 		json_response = json.loads(response)
 
 		for result in json_response['d']['results']:
+			print(result['Title'])
+			print(result['Url'])
+			print(result['Description'])
 			results.append({
 				'title': result['Title'],
 				'link': result['Url'],
@@ -58,7 +56,7 @@ def main():
 	print(BING_API_KEY)
 	
 	userInput = input("Enter query: ")
-	results = run_query('google fibre')
+	results = run_query(userInput)
 
 	for r in results:
 		print(r)
