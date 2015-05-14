@@ -3,7 +3,7 @@ import urllib
 import urllib.parse
 import urllib.request
 import urllib.error
-from keys import BING_API_KEY
+from rango.keys import BING_API_KEY
 
 
 def run_query(search_terms):
