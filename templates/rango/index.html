@@ -5,7 +5,7 @@
 {% block body_block %}
 	<div class="page-header">
 	{% if user.is_authenticated %}
-		<h1>Rango says...{ user.username }}!</h1>
+		<h1>Rango says... hello {{ user.username }}!</h1>
 	{% else %}
 		<h1>Rango says... hello world! </h1><br />
 	{% endif %}

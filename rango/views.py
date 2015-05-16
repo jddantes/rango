@@ -51,7 +51,28 @@ def category(request, category_name_slug):
 		context_dict['category'] = category
 		context_dict['category_name_slug'] = category_name_slug
 	except:
-		pass
+		category = None
+		
+
+	result_list = []
+
+	if request.method == 'POST':
+		query = request.POST['query']
+
+		if query:
+			result_list = run_query(query)
+			context_dict['result_list'] = result_list
+			context_dict['query'] = query
+	try:
+		if not context_dict['query']:
+			pass
+	except:
+		if category:
+			context_dict['query'] = category.name
+		else:
+			context_dict['query'] = category_name_slug
+
+
 
 	return render(request, 'rango/category.html', context_dict)
 
@@ -219,6 +240,7 @@ def search(request):
 		if query:
 			result_list = run_query(query)
 
+
 	return render(request, 'rango/search.html', {'result_list': result_list})
 
 def track_url(request):
@@ -226,14 +248,37 @@ def track_url(request):
 		if 'page_id' in request.GET:
 			page_id = request.GET['page_id']
 			try:
-				pages = Page.objects.filter(url=page_id)
-				for page in pages:
-					page.views  = page.views+1
-					page.save()
-				return HttpResponseRedirect(page_id)
+				page = Page.objects.get(id=page_id)
+				page.views = page.views + 1
+				page.save()
+				return HttpResponseRedirect(page.url)
 			except Exception as e:
-				print('Didnt get object with url ' + page_id)
+				print('Didnt get object with page_id ' + page_id)
 				print(e)
 				pass
 	
 	return HttpResponseRedirect('/rango/')
+
+def register_profile(request):
+
+	if request.user.is_authenticated():
+		registered = False
+		if request.method == 'POST':
+			profile_form = UserProfileForm(data=request.POST)	
+			if profile_form.is_valid():
+				profile = profile_form.save(commit=False)
+				profile.user = request.user
+				if 'picture' in request.FILES:
+					profile.picture = request.FILES['picture']
+				profile.save()
+				registered = True
+			else:
+				print(profile_form.errors)
+		else:
+			profile_form = UserProfileForm()
+		context_dict = {'profile_form':profile_form, 'registered': registered}
+		return render(request, 'rango/profile_registration.html', context_dict)
+	else:
+		return HttpResponseRedirect('/rango/accounts/login/')
+
+	
