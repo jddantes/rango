@@ -281,4 +281,10 @@ def register_profile(request):
 	else:
 		return HttpResponseRedirect('/rango/accounts/login/')
 
+@login_required
+def profile(request):
+
+	context_dict = {}
+	return render(request, 'rango/profile.html', context_dict)
+
 	

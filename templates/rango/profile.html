@@ -1,0 +1,17 @@
+{% extends 'rango/base.html' %}
+
+{% load staticfiles %}
+
+
+
+{% block body_block %}
+<div id="page-header">
+	<h3>Profile</h3>
+</div>
+
+User: {{ user.username }} <br/>
+Email: {{ user.email }} <br />
+Website: {{ user.website  }} <br/>
+Image: {{ user.picture }} <br/>
+
+{% endblock %}
